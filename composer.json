@@ -1,6 +1,6 @@
 {
-    "name": "camoo/enkap-woocommerce-gateway",
-    "description": "Enkap - Mobile Money Gateway for WooCommerce",
+    "name": "camoo/enkap-edd-gateway",
+    "description": "Enkap - Mobile Money Gateway for Easy Digital Downloads",
     "type": "wordpress-plugin",
     "require": {
         "php": ">=7.3",
@@ -27,7 +27,7 @@
         "enkap"
     ],
     "support": {
-        "issues": "https://github.com/camoo/enkap-woocommerce-gateway/issues",
-        "source": "https://github.com/camoo/enkap-woocommerce-gateway"
+        "issues": "https://github.com/camoo/enkap-edd-gateway/issues",
+        "source": "https://github.com/camoo/enkap-edd-gateway"
     }
 }

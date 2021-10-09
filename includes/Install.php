@@ -3,10 +3,10 @@
 namespace Camoo\Enkap\Easy_Digital_Downloads;
 defined('ABSPATH') || exit;
 
-class InstallEnkap
+class Install
 {
 
-    public const PLUGIN_MAIN_FILE = 'enkap-easydigitaldownloads-gateway/e-nkap.php';
+    public const PLUGIN_MAIN_FILE = 'e-nkap-edd-gateway/e-nkap-edd-gateway.php';
     public function __construct()
     {
         add_action('wpmu_new_blog', array($this, 'add_table_on_create_blog'), 10, 1);
@@ -37,7 +37,7 @@ class InstallEnkap
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
         $table_name = $wpdb->prefix . 'edd_enkap_payments';
-        if ($wpdb->get_var("show tables like '$table_name'") != $table_name) {
+        if ($wpdb->get_var("show tables like '$table_name'") !== $table_name) {
             $create_enkap_payments = ("CREATE TABLE IF NOT EXISTS $table_name(
             id int(10) NOT NULL auto_increment,
             edd_order_id bigint unsigned NOT NULL,
@@ -47,7 +47,8 @@ class InstallEnkap
             status_date           datetime      NOT NULL DEFAULT '2021-05-20 00:00:00',
             created_at            timestamp     NOT NULL DEFAULT CURRENT_TIMESTAMP,
             updated_at            timestamp     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            PRIMARY KEY(ID)) CHARSET=utf8");
+            remote_ip             varbinary(64) NOT NULL DEFAULT '0.0.0.0',
+            PRIMARY KEY(id)) CHARSET=utf8");
 
             dbDelta($create_enkap_payments);
         }
@@ -98,5 +99,5 @@ class InstallEnkap
     }
 }
 
-new InstallEnkap();
+(new Install());
 
