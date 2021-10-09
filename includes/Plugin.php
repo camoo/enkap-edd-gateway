@@ -16,6 +16,7 @@ if (!class_exists(Plugin::class)):
 
     class Plugin
     {
+        public const WP_EDD_ENKAP_DB_VERSION = '1.0.0';
         protected $id;
         protected $mainMenuId;
         protected $adapterName;
@@ -43,7 +44,6 @@ if (!class_exists(Plugin::class)):
             $this->title = __('E-nkap Payment Gateway', self::DOMAIN_TEXT);
         }
 
-
         public function register()
         {
             require_once(ABSPATH . 'wp-admin/includes/plugin.php');
@@ -53,19 +53,10 @@ if (!class_exists(Plugin::class)):
             }
 
             register_activation_hook($this->pluginPath, [Install::class, 'install']);
-            register_activation_hook($this->pluginPath, array($this, 'flush_rules'));
+            register_deactivation_hook($this->pluginPath, array($this, 'flush_rules'));
 
             add_filter('plugin_action_links_' . plugin_basename($this->pluginPath), [$this, 'onPluginActionLinks'], 1, 1);
             add_action('plugins_loaded', [$this, 'onInit']);
-            add_action('wp_enqueue_scripts', [__CLASS__, 'enqueue_block_enkap_css_scripts']);
-        }
-
-        public static function enqueue_block_enkap_css_scripts(): void
-        {
-            wp_enqueue_style(
-                'enkap_style',
-                plugins_url('/assets/css/style.css', __FILE__)
-            );
         }
 
         public function onInit()
@@ -75,27 +66,11 @@ if (!class_exists(Plugin::class)):
                 (new EDD_Enkap_Gateway());
             }
             add_action('init', [__CLASS__, 'loadTextDomain']);
-            add_filter('init', array($this, 'rewrite_rules'));
-            add_filter('init', array($this, 'flush_rules'));
         }
 
         public function flush_rules()
         {
-            $this->rewrite_rules();
-
             flush_rewrite_rules();
-        }
-
-        public function rewrite_rules()
-        {
-            add_rewrite_rule('edd-e-nkap/return/(.+?)/?$', 'index.php?edd-listener=return_e_nkap&merchantReferenceId=$matches[1]', 'top');
-            add_rewrite_tag('%merchantReferenceId%', '([^&]+)');
-
-            add_rewrite_rule('edd-e-nkap/notification/(.+?)/?$', 'index.php?edd-listener=notification_e_nkap&merchantReferenceId=$matches[1]', 'top');
-            add_rewrite_tag('%merchantReferenceId%', '([^&]+)');
-
-            add_rewrite_rule('edd-e-nkap/status/(.+?)/?$', 'index.php?edd-listener=status_e_nkap&merchantReferenceId=$matches[1]', 'top');
-            add_rewrite_tag('%merchantReferenceId%', '([^&]+)');
         }
 
         public function onPluginActionLinks($links): array
@@ -140,7 +115,7 @@ if (!class_exists(Plugin::class)):
             return (int)$payment->edd_order_id;
         }
 
-        public static function getEnkapPaymentByMerchantOrderId($orderId)
+        public static function getEnkapPaymentByOrderId($orderId)
         {
             global $wpdb;
 
@@ -215,13 +190,11 @@ if (!class_exists(Plugin::class)):
             return $order->update_status('completed');
         }
 
-
         private static function processWebhookProgress(EDD_Payment $order, string $realStatus): bool
         {
             self::applyStatusChange($realStatus, $order->transaction_id);
             return $order->update_status('processing');
         }
-
 
         private static function processWebhookCanceled(EDD_Payment $order): bool
         {
@@ -255,7 +228,6 @@ if (!class_exists(Plugin::class)):
                     'order_transaction_id' => sanitize_text_field($transactionId)
                 ]
             );
-
         }
 
     }

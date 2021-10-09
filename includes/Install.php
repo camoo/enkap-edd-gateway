@@ -7,6 +7,7 @@ class Install
 {
 
     public const PLUGIN_MAIN_FILE = 'e-nkap-edd-gateway/e-nkap-edd-gateway.php';
+
     public function __construct()
     {
         add_action('wpmu_new_blog', array($this, 'add_table_on_create_blog'), 10, 1);
@@ -63,6 +64,9 @@ class Install
     public static function install($network_wide)
     {
         self::create_table($network_wide);
+        if (is_admin()) {
+            self::upgrade();
+        }
     }
 
     /**
@@ -95,7 +99,22 @@ class Install
             $tables[] = $wpdb->tb_prefix . $tbl;
         }
 
+        delete_option(EDD_Enkap_Gateway::GATEWAY_ID . '_test_mode');
+        delete_option(EDD_Enkap_Gateway::GATEWAY_ID . '_currency');
+        delete_option(EDD_Enkap_Gateway::GATEWAY_ID . '_key');
+        delete_option(EDD_Enkap_Gateway::GATEWAY_ID . '_secret');
         return $tables;
+    }
+
+    /**
+     * Upgrade plugin requirements if needed
+     */
+    public static function upgrade(): void
+    {
+        $installedVersion = get_option('wp_edd_enkap_db_version');
+        if ($installedVersion !== Plugin::WP_EDD_ENKAP_DB_VERSION) {
+            update_option('wp_edd_enkap_db_version', Plugin::WP_EDD_ENKAP_DB_VERSION);
+        }
     }
 }
 
