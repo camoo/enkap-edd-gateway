@@ -19,7 +19,7 @@ The usage of this plugin is completely free. You have to just have an Enkap acco
 # Installation
 We assume you already installed Easy Digital Downloads and configured it successfully
 
-1. Upload `e-nkap` to the `/wp-content/plugins/` directory
+1. Upload `e-nkap-edd-gateway` to the `/wp-content/plugins/` directory
 
    Install Using GIT
 ```sh
@@ -37,8 +37,8 @@ composer install
 2. Search for \"Enkap Payment\".
 3. Install the plugin by pressing the \"Install\" button.
 4. Activate the plugin by pressing the \"Activate\" button.
-5. Open the settings page for Easy Digital Downloads and click the \"Checkout\" tab.
-6. Click on the sub tab for \"Enkap Payment\".
+5. Open the settings page for Easy Digital Downloads and click the \"Payment Gateways\" tab.
+6. Click on the sub tab for \"E-nkap Payment\".
 7. Configure your Enkap Gateway settings.
 
 #### More details can be found on the [documentation website](https://support.enkap.cm)

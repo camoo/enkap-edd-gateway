@@ -102,6 +102,7 @@ class Install
         delete_option(EDD_Enkap_Gateway::GATEWAY_ID . '_currency');
         delete_option(EDD_Enkap_Gateway::GATEWAY_ID . '_key');
         delete_option(EDD_Enkap_Gateway::GATEWAY_ID . '_secret');
+        delete_option(EDD_Enkap_Gateway::GATEWAY_ID . '_keys_configured');
         return $tables;
     }
 

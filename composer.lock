@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "35bc1e8724a272b83a56332f47fcc5ab",
+    "content-hash": "8d19cffefbbe26152602353cc415b4e1",
     "packages": [
         {
             "name": "camoo/cache",
@@ -65,12 +65,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/camoo/enkap-oauth.git",
-                "reference": "6bcbc20b6e1c6078cdc062b714ce74f93f6593e2"
+                "reference": "984a4c76538981689bd351c4bb0a4e3d879b5844"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/camoo/enkap-oauth/zipball/6bcbc20b6e1c6078cdc062b714ce74f93f6593e2",
-                "reference": "6bcbc20b6e1c6078cdc062b714ce74f93f6593e2",
+                "url": "https://api.github.com/repos/camoo/enkap-oauth/zipball/984a4c76538981689bd351c4bb0a4e3d879b5844",
+                "reference": "984a4c76538981689bd351c4bb0a4e3d879b5844",
                 "shasum": ""
             },
             "require": {
@@ -121,7 +121,7 @@
                 "source": "https://github.com/camoo/enkap-oauth",
                 "wiki": "https://github.com/camoo/enkap-oauth/wiki"
             },
-            "time": "2021-10-04T12:51:18+00:00"
+            "time": "2021-10-09T05:19:08+00:00"
         },
         {
             "name": "defuse/php-encryption",

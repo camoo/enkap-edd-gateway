@@ -9,7 +9,6 @@ namespace Camoo\Enkap\Easy_Digital_Downloads;
 
 use EDD_Payment;
 use Enkap\OAuth\Model\Status;
-use WC_Geolocation;
 
 defined('ABSPATH') || exit;
 if (!class_exists(Plugin::class)):
@@ -53,7 +52,6 @@ if (!class_exists(Plugin::class)):
             }
 
             register_activation_hook($this->pluginPath, [Install::class, 'install']);
-            register_deactivation_hook($this->pluginPath, array($this, 'flush_rules'));
 
             add_filter('plugin_action_links_' . plugin_basename($this->pluginPath),
                 [$this, 'onPluginActionLinks'], 1, 1);
@@ -66,7 +64,9 @@ if (!class_exists(Plugin::class)):
             if (class_exists('\\Camoo\\Enkap\\Easy_Digital_Downloads\\' . $this->adapterName)) {
                 (new EDD_Enkap_Gateway());
             }
+
             add_action('init', [__CLASS__, 'loadTextDomain']);
+            register_deactivation_hook($this->pluginPath, array($this, 'flush_rules'));
         }
 
         public function flush_rules()
@@ -95,7 +95,12 @@ if (!class_exists(Plugin::class)):
 
         public static function get_webhook_url($endpoint): string
         {
-            return trailingslashit(get_home_url()) . 'edd-e-nkap/' . sanitize_text_field($endpoint);
+            if (get_option('permalink_structure')) {
+                return trailingslashit(get_home_url()) . 'wp-json/edd-e-nkap/' . sanitize_text_field($endpoint);
+            }
+
+            return add_query_arg('rest_route', '/edd-e-nkap/' . sanitize_text_field($endpoint),
+                trailingslashit(get_home_url()));
         }
 
         public static function getEEDOrderIdByMerchantReferenceId(string $referenceId): ?int
@@ -217,7 +222,7 @@ if (!class_exists(Plugin::class)):
         private static function applyStatusChange(string $status, string $transactionId)
         {
             global $wpdb;
-            $remoteIp = WC_Geolocation::get_ip_address();
+            $remoteIp = edd_get_ip();
             $setData = [
                 'status_date' => current_time('mysql'),
                 'status' => sanitize_title($status)

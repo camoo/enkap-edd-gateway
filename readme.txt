@@ -1,10 +1,13 @@
 === E-nkap Gateway for Easy Digital Downloads ===
 Contributors: camoo, maviance
-Tags: Easy Digital Downloads, Payment, Gateway, Payment Gateways, Shopping Cart, Extension, Invoice, Receipt
+Tags: Easy Digital Downloads, Payment, Gateway, Payment Gateways, Shopping Cart, Extension, Invoice, Receipt, Mobile Money, coupons
 Requires at least: 4.7
 Tested up to: 5.8.1
+Stable Tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
+E-nkap for Easy Digital Downloads is a simple and powerful Mobile Money Payment Gateway plugin
 
 == Description ==
 **This is the Mobile Money payment gateway for Easy Digital Downloads.**
@@ -45,7 +48,7 @@ Yes! you can receive SmobilPay cash, if your buyer has an account with Smobilpay
 6. Select "E-Nkap".
 7. Configure your Enkap Gateway settings.
 
-More details can be found on the documentation website https://support.enkap.cm
+More details can be found on the [https://support.enkap.cm](documentation website)
 
 = Minimum Requirements =
 * WordPress version 4.7 or greater.
