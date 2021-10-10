@@ -55,7 +55,8 @@ if (!class_exists(Plugin::class)):
             register_activation_hook($this->pluginPath, [Install::class, 'install']);
             register_deactivation_hook($this->pluginPath, array($this, 'flush_rules'));
 
-            add_filter('plugin_action_links_' . plugin_basename($this->pluginPath), [$this, 'onPluginActionLinks'], 1, 1);
+            add_filter('plugin_action_links_' . plugin_basename($this->pluginPath),
+                [$this, 'onPluginActionLinks'], 1, 1);
             add_action('plugins_loaded', [$this, 'onInit']);
         }
 
@@ -97,15 +98,14 @@ if (!class_exists(Plugin::class)):
             return trailingslashit(get_home_url()) . 'edd-e-nkap/' . sanitize_text_field($endpoint);
         }
 
-        public static function getEEDOrderIdByMerchantReferenceId($id_code): ?int
+        public static function getEEDOrderIdByMerchantReferenceId(string $referenceId): ?int
         {
-
             global $wpdb;
-            if (!wp_is_uuid(sanitize_text_field($id_code))) {
+            if (!wp_is_uuid(sanitize_text_field($referenceId))) {
                 return null;
             }
 
-            $db_prepare = $wpdb->prepare("SELECT * FROM `{$wpdb->prefix}edd_enkap_payments` WHERE `merchant_reference_id` = %s", $id_code);
+            $db_prepare = $wpdb->prepare("SELECT * FROM `{$wpdb->prefix}edd_enkap_payments` WHERE `merchant_reference_id` = %s", $referenceId);
             $payment = $wpdb->get_row($db_prepare);
 
             if (!$payment) {
@@ -115,7 +115,7 @@ if (!class_exists(Plugin::class)):
             return (int)$payment->edd_order_id;
         }
 
-        public static function getEnkapPaymentByOrderId($orderId)
+        public static function getEnkapPaymentByOrderId(int $orderId)
         {
             global $wpdb;
 
@@ -185,8 +185,10 @@ if (!class_exists(Plugin::class)):
         private static function processWebhookConfirmed(EDD_Payment $order): bool
         {
             self::applyStatusChange(Status::CONFIRMED_STATUS, $order->transaction_id);
-            $order->add_note(sprintf(__('E-nkap payment completed! Transaction ID: %s', self::DOMAIN_TEXT),
-                $order->transaction_id));
+            $order->add_note(sprintf(
+                __('E-nkap payment completed! Transaction ID: %s', self::DOMAIN_TEXT),
+                $order->transaction_id
+            ));
             return $order->update_status('completed');
         }
 
@@ -199,8 +201,10 @@ if (!class_exists(Plugin::class)):
         private static function processWebhookCanceled(EDD_Payment $order): bool
         {
             self::applyStatusChange(Status::CANCELED_STATUS, $order->transaction_id);
-            $order->add_note(sprintf(__('E-nkap payment cancelled! Transaction ID: %s', self::DOMAIN_TEXT),
-                $order->transaction_id));
+            $order->add_note(sprintf(
+                __('E-nkap payment cancelled! Transaction ID: %s', self::DOMAIN_TEXT),
+                $order->transaction_id
+            ));
             return $order->update_status('revoked');
         }
 
@@ -229,7 +233,6 @@ if (!class_exists(Plugin::class)):
                 ]
             );
         }
-
     }
 
 endif;

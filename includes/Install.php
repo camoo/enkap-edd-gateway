@@ -1,11 +1,11 @@
 <?php
 
 namespace Camoo\Enkap\Easy_Digital_Downloads;
+
 defined('ABSPATH') || exit;
 
 class Install
 {
-
     public const PLUGIN_MAIN_FILE = 'e-nkap-edd-gateway/e-nkap-edd-gateway.php';
 
     public function __construct()
@@ -53,7 +53,6 @@ class Install
 
             dbDelta($create_enkap_payments);
         }
-
     }
 
     /**
@@ -119,4 +118,3 @@ class Install
 }
 
 (new Install());
-

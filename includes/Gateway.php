@@ -58,16 +58,19 @@ class EDD_Enkap_Gateway
         add_filter('edd_accepted_payment_icons', array($this, 'payment_icon'));
         add_filter('edd_payment_gateways', [$this, 'onAddGateway']);
         add_filter('edd_settings_sections_gateways', array($this, 'onEddENkapSettingsSection'), 10, 1);
-
     }
 
     public static function extendPaymentHeaderView()
     {
         $columns = [
-            '<th class="edd_enkap_purchase_merchant_ref">' . esc_html__('e-nkap Merchant Reference ID',
-                Plugin::DOMAIN_TEXT) . '</th>',
-            '<th class="edd_enkap_purchase_transaction_id">' . esc_html__('e-nkap Transaction ID',
-                Plugin::DOMAIN_TEXT) . '</th>'
+            '<th class="edd_enkap_purchase_merchant_ref">' . esc_html__(
+                'e-nkap Merchant Reference ID',
+                Plugin::DOMAIN_TEXT
+            ) . '</th>',
+            '<th class="edd_enkap_purchase_transaction_id">' . esc_html__(
+                'e-nkap Transaction ID',
+                Plugin::DOMAIN_TEXT
+            ) . '</th>'
         ];
 
         echo implode("\n", $columns);
@@ -114,8 +117,10 @@ class EDD_Enkap_Gateway
 
     public function payment_icon($icons)
     {
-        $icons[plugin_dir_url(dirname(__FILE__)) . 'assets/images/e-nkap.png'] = esc_attr__('E-nkap Payment Gateway',
-            Plugin::DOMAIN_TEXT);
+        $icons[plugin_dir_url(dirname(__FILE__)) . 'assets/images/e-nkap.png'] = esc_attr__(
+            'E-nkap Payment Gateway',
+            Plugin::DOMAIN_TEXT
+        );
         return $icons;
     }
 
@@ -133,8 +138,10 @@ class EDD_Enkap_Gateway
                 'name' => esc_html__('Test mode', Plugin::DOMAIN_TEXT),
                 'label' => esc_html__('Enable Test Mode', Plugin::DOMAIN_TEXT),
                 'type' => 'checkbox',
-                'description' => esc_html__('Place the payment gateway in test mode using test API keys.',
-                    Plugin::DOMAIN_TEXT),
+                'description' => esc_html__(
+                    'Place the payment gateway in test mode using test API keys.',
+                    Plugin::DOMAIN_TEXT
+                ),
                 'std' => 0,
             ],
             [
@@ -240,9 +247,14 @@ class EDD_Enkap_Gateway
         $payment = edd_insert_payment($payment_data);
 
         if (!$payment) {
-            edd_record_gateway_error('Payment Error',
-                sprintf('Payment creation failed before sending buyer to E-Nkap. Payment data: %s',
-                    json_encode($payment_data)), $payment);
+            edd_record_gateway_error(
+                'Payment Error',
+                sprintf(
+                    'Payment creation failed before sending buyer to E-Nkap. Payment data: %s',
+                    json_encode($payment_data)
+                ),
+                $payment
+            );
             edd_send_back_to_checkout(['payment-mode' => $this->id]);
         } else {
             $orderService = new OrderService($this->_key, $this->_secret, [], $this->testMode);
@@ -251,7 +263,8 @@ class EDD_Enkap_Gateway
             $orderData = [
                 'merchantReference' => $merchantReferenceId,
                 'email' => $purchase_data['user_email'],
-                'customerName' => $purchase_data['user_info']['first_name'] . ' ' . $purchase_data['user_info']['last_name'],
+                'customerName' => $purchase_data['user_info']['first_name'] . ' ' .
+                    $purchase_data['user_info']['last_name'],
                 'totalAmount' => (float)$purchase_data['price'],
                 'description' => 'Payment from ' . get_bloginfo('name'),
                 'currency' => sanitize_text_field($this->get_option($this->id . '_currency')),
@@ -271,17 +284,19 @@ class EDD_Enkap_Gateway
                 $order->fromStringArray($orderData);
                 $response = $orderService->place($order);
                 edd_set_payment_transaction_id($payment, $response->getOrderTransactionId());
-                edd_insert_payment_note($payment, __('E-Nkap payment accepted awaiting partner confirmation',
-                    Plugin::DOMAIN_TEXT));
+                edd_insert_payment_note($payment, __(
+                    'E-Nkap payment accepted awaiting partner confirmation',
+                    Plugin::DOMAIN_TEXT
+                ));
                 $this->logEnkapPayment($payment, $merchantReferenceId, $response->getOrderTransactionId());
-                wp_redirect($response->getRedirectUrl());
+                wp_safe_redirect($response->getRedirectUrl());
             } catch (Throwable $exception) {
                 edd_record_gateway_error('Payment Error', sanitize_text_field($exception->getMessage()));
                 edd_set_error($this->id . '_error', 'Can\'t connect to the E-Nkap gateway, Please try again.');
                 edd_send_back_to_checkout(['payment-mode' => $this->id]);
             }
         }
-        return null;
+        exit;
     }
 
     public function onReturn()
@@ -291,7 +306,7 @@ class EDD_Enkap_Gateway
 
         if (empty($orderId)) {
             wp_redirect(get_home_url());
-            exit();
+            Helper::exitOrDie();
         }
         $status = filter_input(INPUT_GET, 'status');
 
@@ -308,7 +323,7 @@ class EDD_Enkap_Gateway
             edd_send_to_success_page();
         }
 
-        exit;
+        Helper::exitOrDie();
     }
 
     public function onNotification(): WP_REST_Response
@@ -360,7 +375,8 @@ class EDD_Enkap_Gateway
         $url = wp_nonce_url(
             admin_url('admin-ajax.php?action=e_nkap_mark_order_status&status=check&order_id=' .
                 absint(wp_unslash($payment_id))),
-            'edd_enkap_check_status');
+            'edd_enkap_check_status'
+        );
 
         echo '<div class="edd-enkap-track edd-admin-box-inside">';
         echo '<h3>E-Nkap details</h3>';
@@ -371,7 +387,6 @@ class EDD_Enkap_Gateway
         echo '<a href="' . esc_url($url) .
             '" target="_blank" class="button check-status">' . __('Check Payment status', Plugin::DOMAIN_TEXT) . '</a>';
         echo '</div>';
-
     }
 
     protected function logEnkapPayment(int $orderId, string $merchantReferenceId, string $orderTransactionId)
@@ -426,7 +441,6 @@ class EDD_Enkap_Gateway
 
     public function checkRemotePaymentStatus()
     {
-
         if (current_user_can('edit_shop_orders') &&
             check_admin_referer('edd_enkap_check_status') &&
             isset($_GET['status'], $_GET['order_id'])) {
@@ -435,7 +449,6 @@ class EDD_Enkap_Gateway
             $orderId = absint(wp_unslash($_GET['order_id']));
             $order = new EDD_Payment($orderId);
             if ($status === 'check' && !empty($order) && in_array($order->status, ['pending', 'processing'])) {
-
                 $consumerKey = $this->_key;
                 $consumerSecret = $this->_secret;
                 $statusService = new StatusService($consumerKey, $consumerSecret, [], $this->testMode);
@@ -448,6 +461,6 @@ class EDD_Enkap_Gateway
         }
 
         wp_safe_redirect(wp_get_referer() ? wp_get_referer() : admin_url(self::ADMIN_OVERVIEW));
-        exit();
+        Helper::exitOrDie();
     }
 }

@@ -40,3 +40,5 @@ composer install
 5. Open the settings page for Easy Digital Downloads and click the \"Checkout\" tab.
 6. Click on the sub tab for \"Enkap Payment\".
 7. Configure your Enkap Gateway settings.
+
+#### More details can be found on the [documentation website](https://support.enkap.cm)
