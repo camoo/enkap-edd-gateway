@@ -97,7 +97,7 @@ class Install
         foreach (['edd_enkap_payments'] as $tbl) {
             $tables[] = $wpdb->tb_prefix . $tbl;
         }
-
+        delete_option('wp_edd_enkap_db_version');
         delete_option(EDD_Enkap_Gateway::GATEWAY_ID . '_test_mode');
         delete_option(EDD_Enkap_Gateway::GATEWAY_ID . '_currency');
         delete_option(EDD_Enkap_Gateway::GATEWAY_ID . '_key');
