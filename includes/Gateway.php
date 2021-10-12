@@ -58,7 +58,6 @@ class EDD_Enkap_Gateway
 
         add_action('rest_api_init', [$this, 'notification_route']);
         add_action('rest_api_init', [$this, 'return_route']);
-
     }
 
     /**
@@ -275,7 +274,6 @@ class EDD_Enkap_Gateway
                 array('status' => 400)
             );
         }
-
     }
 
     public function process_payment($purchase_data)
