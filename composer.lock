@@ -65,12 +65,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/camoo/enkap-oauth.git",
-                "reference": "984a4c76538981689bd351c4bb0a4e3d879b5844"
+                "reference": "bebc9760feb956de7ad82406fe9e5b6e577778ad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/camoo/enkap-oauth/zipball/984a4c76538981689bd351c4bb0a4e3d879b5844",
-                "reference": "984a4c76538981689bd351c4bb0a4e3d879b5844",
+                "url": "https://api.github.com/repos/camoo/enkap-oauth/zipball/bebc9760feb956de7ad82406fe9e5b6e577778ad",
+                "reference": "bebc9760feb956de7ad82406fe9e5b6e577778ad",
                 "shasum": ""
             },
             "require": {
@@ -121,7 +121,7 @@
                 "source": "https://github.com/camoo/enkap-oauth",
                 "wiki": "https://github.com/camoo/enkap-oauth/wiki"
             },
-            "time": "2021-10-09T05:19:08+00:00"
+            "time": "2021-10-10T16:53:32+00:00"
         },
         {
             "name": "defuse/php-encryption",
