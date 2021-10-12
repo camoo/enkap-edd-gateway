@@ -46,9 +46,9 @@ Yes! you can receive SmobilPay cash, if your buyer has an account with Smobilpay
 4. Activate the plugin by pressing the "Activate" button.
 5. Open the settings page for Easy Digital Downloads and click the "Payment Gateway" tab.
 6. Select "E-Nkap".
-7. Configure your Enkap Gateway settings.
+7. Configure your E-nkap Gateway settings.
 
-More details can be found on the [https://support.enkap.cm](documentation website)
+More details can be found on the [documentation website](https://support.enkap.cm)
 
 = Minimum Requirements =
 * WordPress version 4.7 or greater.
