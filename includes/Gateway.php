@@ -166,7 +166,20 @@ class EDD_Enkap_Gateway
             [
                 'id' => 'config_' . $this->id,
                 'name' => __('API Settings', 'easy-digital-downloads'),
-                'desc' => sprintf(__('Enter your E-nkap API credentials to process Payments via E-nkap. Learn how to access your <a href="%s">E-nkap API Credentials</a>.', Plugin::DOMAIN_TEXT), 'https://enkap.cm/faq/'),
+                'desc' =>
+                    wp_kses(
+                        sprintf(
+                            __('Enter your E-nkap API credentials to process Payments via E-nkap. Learn how to access your <a href="%s" target="_blank" rel="noopener noreferrer">E-nkap API Credentials</a>.',
+                                Plugin::DOMAIN_TEXT)
+                            , 'https://enkap.cm/faq/'),
+                        [
+                            'a' => [
+                                'href' => true,
+                                'target' => true,
+                                'rel' => true,
+                            ],
+                        ]
+                    ),
                 'type' => 'descriptive_text'
             ],
             [
