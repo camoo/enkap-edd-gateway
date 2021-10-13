@@ -245,7 +245,7 @@ class EDD_Enkap_Gateway
         }
         $this->_key = sanitize_text_field($consumerKey);
         $this->_secret = sanitize_text_field($consumerSecret);
-        $isTest = !empty(sanitize_text_field($testModeValue));
+        $isTest = !empty(sanitize_text_field($testModeValue)) && $testModeValue !== '-1';
 
         $setup = new CallbackUrlService($this->_key, $this->_secret, [], $isTest);
         /** @var CallbackUrl $callBack */
@@ -257,7 +257,6 @@ class EDD_Enkap_Gateway
         } catch (Throwable $exception) {
             edd_record_gateway_error($this->id . '_callback_error', sanitize_text_field($exception->getMessage()));
         }
-        update_option(self::GATEWAY_ID . '_keys_configured', empty($result) ? 'no' : 'yes');
 
         if (empty($result)) {
             $message = __('Keys could not be setup properly. Please make sure that your Consumers keys pairs are valid.',
@@ -278,13 +277,7 @@ class EDD_Enkap_Gateway
 
     public function process_payment($purchase_data)
     {
-        if ($this->get_option(self::GATEWAY_ID . '_keys_configured') !== 'yes') {
-            edd_record_gateway_error('Process Payment Error', 'Key pairs not configured');
-            edd_set_error($this->id . '_error_process_payment',
-                esc_html__('Can\'t connect to the E-Nkap gateway, Please try again.', Plugin::DOMAIN_TEXT));
-            edd_send_back_to_checkout(['payment-mode' => $this->id]);
-            Helper::exitOrDie();
-        }
+
         $payment_data = [
             'price' => $purchase_data['price'],
             'date' => $purchase_data['date'],

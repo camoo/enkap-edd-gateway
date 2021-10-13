@@ -199,7 +199,11 @@ if (!class_exists(Plugin::class)):
 
         private static function processWebhookProgress(EDD_Payment $order, string $realStatus): bool
         {
+            if (in_array($order->status, ['complete', 'publish', 'completed'], true)) {
+                return true;
+            }
             self::applyStatusChange($realStatus, $order->transaction_id);
+
             return $order->update_status('processing');
         }
 
