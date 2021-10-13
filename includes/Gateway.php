@@ -434,7 +434,7 @@ class EDD_Enkap_Gateway
         echo '<p> ' . esc_html__('e-nkap Transaction ID', Plugin::DOMAIN_TEXT) . ': <strong>' .
             esc_html($payment->order_transaction_id) . '</strong></p>';
 
-        if (in_array(strtoupper($payment->status), ['in_progress', 'created', 'initialised'], true)) {
+        if (in_array(strtolower($payment->status), ['in_progress', 'created', 'initialised'], true)) {
             echo '<a href="' . esc_url($url) .
                 '" class="button check-status">' . __('Check Payment status', Plugin::DOMAIN_TEXT) . '</a>';
         }
