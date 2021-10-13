@@ -433,9 +433,12 @@ class EDD_Enkap_Gateway
             esc_html($payment->merchant_reference_id) . '</strong></p>';
         echo '<p> ' . esc_html__('e-nkap Transaction ID', Plugin::DOMAIN_TEXT) . ': <strong>' .
             esc_html($payment->order_transaction_id) . '</strong></p>';
-        echo '<a href="' . esc_url($url) .
-            '" class="button check-status">' . __('Check Payment status', Plugin::DOMAIN_TEXT) . '</a>';
-        echo '</div>';
+
+        if (in_array(strtoupper($payment->status), ['in_progress', 'created', 'initialised'], true)) {
+            echo '<a href="' . esc_url($url) .
+                '" class="button check-status">' . __('Check Payment status', Plugin::DOMAIN_TEXT) . '</a>';
+            echo '</div>';
+        }
     }
 
     protected function logEnkapPayment(int $orderId, string $merchantReferenceId, string $orderTransactionId)
