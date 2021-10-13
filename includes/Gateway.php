@@ -437,8 +437,8 @@ class EDD_Enkap_Gateway
         if (in_array(strtoupper($payment->status), ['in_progress', 'created', 'initialised'], true)) {
             echo '<a href="' . esc_url($url) .
                 '" class="button check-status">' . __('Check Payment status', Plugin::DOMAIN_TEXT) . '</a>';
-            echo '</div>';
         }
+        echo '</div>';
     }
 
     protected function logEnkapPayment(int $orderId, string $merchantReferenceId, string $orderTransactionId)
