@@ -35,7 +35,7 @@ class EDD_Enkap_Gateway
 
     public function __construct()
     {
-        $this->title = esc_html__('SmobilPay for e-commerce payment', Plugin::DOMAIN_TEXT);
+        $this->title = esc_html__('SmobilPay for e-commerce', Plugin::DOMAIN_TEXT);
         $this->testMode = '1' === sanitize_text_field($this->get_option($this->id . '_test_mode'));
 
         $this->_key = sanitize_text_field($this->get_option($this->id . '_key'));
@@ -109,7 +109,7 @@ class EDD_Enkap_Gateway
     public function onAddGateway($gateways)
     {
         $gateways[$this->id] = [
-            'admin_label' => esc_html__('SmobilPay for e-commerce Payment Gateway', Plugin::DOMAIN_TEXT),
+            'admin_label' => esc_html__('SmobilPay for e-commerce', Plugin::DOMAIN_TEXT),
             'checkout_label' => $this->title
         ];
         return $gateways;
@@ -125,7 +125,7 @@ class EDD_Enkap_Gateway
     public function payment_icon($icons)
     {
         $icons[plugin_dir_url(dirname(__FILE__)) . 'assets/images/e-nkap.png'] = esc_attr__(
-            'SmobilPay for e-commerce Payment Gateway',
+            'SmobilPay for e-commerce',
             Plugin::DOMAIN_TEXT
         );
         return $icons;
@@ -203,7 +203,7 @@ class EDD_Enkap_Gateway
                 'name' => esc_html__('Description', Plugin::DOMAIN_TEXT),
                 'type' => 'textarea',
                 'description' => __('This controls the description which the user sees during checkout.', Plugin::DOMAIN_TEXT),
-                'default' => esc_html__('Pay with your mobile phone via SmobilPay for e-commerce payment gateway.', Plugin::DOMAIN_TEXT),
+                'default' => esc_html__('Pay with your mobile phone via SmobilPay for e-commerce.', Plugin::DOMAIN_TEXT),
                 'desc_tip' => true,
                 'size' => 'regular',
                 'class' => 'edd-hidden'
