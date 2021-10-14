@@ -35,7 +35,7 @@ class EDD_Enkap_Gateway
 
     public function __construct()
     {
-        $this->title = esc_html__('E-nkap payment', Plugin::DOMAIN_TEXT);
+        $this->title = esc_html__('SmobilPay for e-commerce payment', Plugin::DOMAIN_TEXT);
         $this->testMode = '1' === sanitize_text_field($this->get_option($this->id . '_test_mode'));
 
         $this->_key = sanitize_text_field($this->get_option($this->id . '_key'));
@@ -109,7 +109,7 @@ class EDD_Enkap_Gateway
     public function onAddGateway($gateways)
     {
         $gateways[$this->id] = [
-            'admin_label' => esc_html__('E-nkap Payment Gateway', Plugin::DOMAIN_TEXT),
+            'admin_label' => esc_html__('SmobilPay for e-commerce Payment Gateway', Plugin::DOMAIN_TEXT),
             'checkout_label' => $this->title
         ];
         return $gateways;
@@ -125,7 +125,7 @@ class EDD_Enkap_Gateway
     public function payment_icon($icons)
     {
         $icons[plugin_dir_url(dirname(__FILE__)) . 'assets/images/e-nkap.png'] = esc_attr__(
-            'E-nkap Payment Gateway',
+            'SmobilPay for e-commerce Payment Gateway',
             Plugin::DOMAIN_TEXT
         );
         return $icons;
@@ -136,8 +136,8 @@ class EDD_Enkap_Gateway
         $edd_enkap_settings = [
             [
                 'id' => 'header_' . $this->id,
-                'name' => esc_html__('E-nkap Gateway Settings', Plugin::DOMAIN_TEXT),
-                'desc' => esc_html__('Configure the E-Nkap gateway settings', Plugin::DOMAIN_TEXT),
+                'name' => esc_html__('SmobilPay for e-commerce Gateway Settings', Plugin::DOMAIN_TEXT),
+                'desc' => esc_html__('Configure the SmobilPay for e-commerce gateway settings', Plugin::DOMAIN_TEXT),
                 'type' => 'header'
             ],
             [
@@ -168,7 +168,7 @@ class EDD_Enkap_Gateway
                 'desc' =>
                     wp_kses(
                         sprintf(
-                            __('Enter your E-nkap API credentials to process Payments via E-nkap. Learn how to access your <a href="%s" target="_blank" rel="noopener noreferrer">E-nkap API Credentials</a>.',
+                            __('Enter your SmobilPay for e-commerce API credentials to process Payments via SmobilPay for e-commerce. Learn how to access your <a href="%s" target="_blank" rel="noopener noreferrer">SmobilPay for e-commerce API Credentials</a>.',
                                 Plugin::DOMAIN_TEXT)
                             , 'https://enkap.cm/faq/'),
                         [
@@ -186,7 +186,7 @@ class EDD_Enkap_Gateway
                 'name' => esc_html__('Consumer Key', Plugin::DOMAIN_TEXT),
                 'tooltip_title' => __('Consumer Key', Plugin::DOMAIN_TEXT),
                 'type' => 'text',
-                'tooltip_desc' => esc_html__('Get your API Consumer Key from E-nkap.', Plugin::DOMAIN_TEXT),
+                'tooltip_desc' => esc_html__('Get your API Consumer Key from SmobilPay for e-commerce.', Plugin::DOMAIN_TEXT),
                 'size' => 'regular'
             ],
             [
@@ -196,14 +196,14 @@ class EDD_Enkap_Gateway
                 'default' => '',
                 'size' => 'regular',
                 'tooltip_title' => __('Consumer Secret', Plugin::DOMAIN_TEXT),
-                'tooltip_desc' => esc_html__('Get your API Consumer Secret from E-nkap.', Plugin::DOMAIN_TEXT),
+                'tooltip_desc' => esc_html__('Get your API Consumer Secret from SmobilPay for e-commerce.', Plugin::DOMAIN_TEXT),
             ],
             [
                 'id' => $this->id . '_description',
                 'name' => esc_html__('Description', Plugin::DOMAIN_TEXT),
                 'type' => 'textarea',
                 'description' => __('This controls the description which the user sees during checkout.', Plugin::DOMAIN_TEXT),
-                'default' => esc_html__('Pay with your mobile phone via E-nkap payment gateway.', Plugin::DOMAIN_TEXT),
+                'default' => esc_html__('Pay with your mobile phone via SmobilPay for e-commerce payment gateway.', Plugin::DOMAIN_TEXT),
                 'desc_tip' => true,
                 'size' => 'regular',
                 'class' => 'edd-hidden'
@@ -297,7 +297,7 @@ class EDD_Enkap_Gateway
             edd_record_gateway_error(
                 'Payment Error',
                 sprintf(
-                    'Payment creation failed before sending buyer to E-Nkap. Payment data: %s',
+                    'Payment creation failed before sending buyer to SmobilPay for e-commerce. Payment data: %s',
                     json_encode($payment_data)
                 ),
                 $payment
@@ -332,7 +332,7 @@ class EDD_Enkap_Gateway
                 $response = $orderService->place($order);
                 edd_set_payment_transaction_id($payment, $response->getOrderTransactionId());
                 edd_insert_payment_note($payment, __(
-                    'E-nkap payment accepted awaiting partner confirmation',
+                    'SmobilPay for e-commerce payment accepted awaiting partner confirmation',
                     Plugin::DOMAIN_TEXT
                 ));
                 $this->logEnkapPayment($payment, $merchantReferenceId, $response->getOrderTransactionId());
@@ -340,7 +340,7 @@ class EDD_Enkap_Gateway
             } catch (Throwable $exception) {
                 edd_record_gateway_error('Payment Error', sanitize_text_field($exception->getMessage()));
                 edd_set_error($this->id . '_error',
-                    esc_html__('Can\'t connect to the E-Nkap gateway, Please try again.', Plugin::DOMAIN_TEXT));
+                    esc_html__('Can\'t connect to the SmobilPay for e-commerce gateway, Please try again.', Plugin::DOMAIN_TEXT));
                 edd_send_back_to_checkout(['payment-mode' => $this->id]);
             }
         }
@@ -422,7 +422,7 @@ class EDD_Enkap_Gateway
         }
 
         echo '<div class="edd-enkap-track edd-admin-box-inside">';
-        echo '<h3>E-Nkap details</h3>';
+        echo '<h3>SmobilPay for e-commerce details</h3>';
         echo '<p> ' . esc_html__('e-nkap Merchant Reference ID', Plugin::DOMAIN_TEXT) . ': <strong>' .
             esc_html($payment->merchant_reference_id) . '</strong></p>';
         echo '<p> ' . esc_html__('e-nkap Transaction ID', Plugin::DOMAIN_TEXT) . ': <strong>' .

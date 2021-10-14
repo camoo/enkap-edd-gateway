@@ -1,4 +1,4 @@
-=== E-nkap Gateway for Easy Digital Downloads ===
+=== SmobilPay for e-commerce Gateway for Easy Digital Downloads ===
 Contributors: camoo, maviance
 Tags: Easy Digital Downloads, Payment, Gateway, Payment Gateways, Shopping Cart, Extension, Invoice, Receipt, Mobile Money, coupons
 Requires at least: 4.7
@@ -7,19 +7,19 @@ Stable Tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-E-nkap for Easy Digital Downloads is a simple and powerful Mobile Money Payment Gateway plugin
+SmobilPay for e-commerce for Easy Digital Downloads is a simple and powerful Mobile Money Payment Gateway plugin
 
 == Description ==
 **This is the Mobile Money payment gateway for Easy Digital Downloads.**
 
 = About Enkap =
-E-nkap is an online payment service aggregator that allows web users and e-Commerce companies to buy and sell on the Internet using all existing local and international payment methods.
+SmobilPay for e-commerce is an online payment service aggregator that allows web users and e-Commerce companies to buy and sell on the Internet using all existing local and international payment methods.
 We enable digital organisations to accept cash payments, Mobile Money, or payments by cards.
 Offering a simple unique API to enable local businesses to go participate in the huge digital economy by transforming their service offerings into the world of e-commerce sites. Meet your customers where they spend more and more time – online!
 
 = About the plugin =
 Cameroonians avoid online buying because it lacks local payments known to consumers.
-Customers are more likely to finalize a purchase on a site that has their preferred payment options. This E-nkap plugin permits you to use all Mobile money payment gateways available in Cameroon with the Easy Digital Downloads plugin. This integration uses a single API. The user experience for the end-user be it tech-savvy or not, is hassle-free.
+Customers are more likely to finalize a purchase on a site that has their preferred payment options. This SmobilPay for e-commerce plugin permits you to use all Mobile money payment gateways available in Cameroon with the Easy Digital Downloads plugin. This integration uses a single API. The user experience for the end-user be it tech-savvy or not, is hassle-free.
 
 = Features =
 * Pay with Cameroon MTN Mobile Money
@@ -45,8 +45,8 @@ Yes! you can receive SmobilPay cash, if your buyer has an account with Smobilpay
 3. Install the plugin by pressing the "Install" button.
 4. Activate the plugin by pressing the "Activate" button.
 5. Open the settings page for Easy Digital Downloads and click the "Payment Gateway" tab.
-6. Select "E-Nkap".
-7. Configure your E-nkap Gateway settings.
+6. Select "SmobilPay for e-commerce".
+7. Configure your SmobilPay for e-commerce Gateway settings.
 
 More details can be found on the [documentation website](https://support.enkap.cm)
 

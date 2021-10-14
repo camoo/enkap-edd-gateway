@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Plugin Name: E-nkap for Easy Digital Downloads
+ * Plugin Name: SmobilPay for e-commerce for Easy Digital Downloads
  * Plugin URI: https://enkap.cm/
- * Description: Receive Mobile Money payments on your store using E-nkap.
+ * Description: Receive Mobile Money payments on your store using SmobilPay for e-commerce.
  * Version: 1.0.0
  * Tested up to: 5.8.1
  * EDD requires at least: 2.0
@@ -32,7 +32,7 @@ require_once(__DIR__ . '/includes/Plugin.php');
     'EDD_Enkap_Gateway',
     'Gateway',
     sprintf('%s<br/><a href="%s" target="_blank">%s</a><br/><a href="%s" target="_blank">%s</a>',
-        __('E-nkap payment gateway', Plugin::DOMAIN_TEXT),
+        __('SmobilPay for e-commerce payment gateway', Plugin::DOMAIN_TEXT),
         'https://enkap.cm/#comptenkap',
         __('Do you have any questions or requests?', Plugin::DOMAIN_TEXT),
         'https://support.enkap.cm',

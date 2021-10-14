@@ -40,7 +40,7 @@ if (!class_exists(Plugin::class)):
             $this->optionKey = '';
 
             $this->mainMenuId = 'admin.php';
-            $this->title = __('E-nkap Payment Gateway', self::DOMAIN_TEXT);
+            $this->title = __('SmobilPay for e-commerce Payment Gateway', self::DOMAIN_TEXT);
         }
 
         public function register()
@@ -191,7 +191,7 @@ if (!class_exists(Plugin::class)):
         {
             self::applyStatusChange(Status::CONFIRMED_STATUS, $order->transaction_id);
             $order->add_note(sprintf(
-                __('E-nkap payment completed! Transaction ID: %s', self::DOMAIN_TEXT),
+                __('SmobilPay for e-commerce payment completed! Transaction ID: %s', self::DOMAIN_TEXT),
                 $order->transaction_id
             ));
             return $order->update_status('completed');
@@ -211,7 +211,7 @@ if (!class_exists(Plugin::class)):
         {
             self::applyStatusChange(Status::CANCELED_STATUS, $order->transaction_id);
             $order->add_note(sprintf(
-                __('E-nkap payment cancelled! Transaction ID: %s', self::DOMAIN_TEXT),
+                __('SmobilPay for e-commerce payment cancelled! Transaction ID: %s', self::DOMAIN_TEXT),
                 $order->transaction_id
             ));
             return $order->update_status('revoked');

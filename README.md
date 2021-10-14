@@ -1,5 +1,5 @@
-# E-nkap - Mobile Money Gateway for Easy Digital Downloads
-E-nkap Gateway for Easy Digital Downloads is a simple and powerful Payment plugin for WordPress
+# SmobilPay for e-commerce - Mobile Money Gateway for Easy Digital Downloads
+SmobilPay for e-commerce Gateway for Easy Digital Downloads is a simple and powerful Payment plugin for WordPress
 
 You can add to WordPress, the ability to receive easily Mobile Money payment from Cameroon
 
@@ -38,7 +38,7 @@ composer install
 3. Install the plugin by pressing the \"Install\" button.
 4. Activate the plugin by pressing the \"Activate\" button.
 5. Open the settings page for Easy Digital Downloads and click the \"Payment Gateways\" tab.
-6. Click on the sub tab for \"E-nkap Payment\".
+6. Click on the sub tab for \"SmobilPay for e-commerce Payment\".
 7. Configure your Enkap Gateway settings.
 
 #### More details can be found on the [documentation website](https://support.enkap.cm)
