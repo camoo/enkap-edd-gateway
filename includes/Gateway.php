@@ -428,7 +428,8 @@ class EDD_Enkap_Gateway
         echo '<p> ' . esc_html__('e-nkap Transaction ID', Plugin::DOMAIN_TEXT) . ': <strong>' .
             esc_html($payment->order_transaction_id) . '</strong></p>';
 
-        if (in_array(strtolower($payment->status), ['in_progress', 'created', 'initialised'], true)) {
+        if (empty($payment->status) ||
+            in_array(strtolower($payment->status), ['in_progress', 'created', 'initialised'], true)) {
             $url = wp_nonce_url(
                 admin_url('admin-post.php?action=edd_enkap_mark_order_status&status=check&order_id=' .
                     absint(wp_unslash($payment_id))),
