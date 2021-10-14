@@ -44,10 +44,10 @@ class EDD_Enkap_Gateway
         if (is_admin()) {
             add_filter('edd_settings_gateways', [$this, 'init_settings'], 1, 1);
             add_filter('edd_view_order_details_payment_meta_after', [$this, 'onAdminDetailAction']);
-            add_action('wp_ajax_e_nkap_mark_order_status', [$this, 'checkRemotePaymentStatus']);
             add_filter('edd_purchase_history_header_after', [__CLASS__, 'extendPaymentHeaderView'], 10);
             add_action('edd_purchase_history_row_end', [__CLASS__, 'extendPaymentRowView'], 10, 2);
             add_action('admin_init', [$this, 'process_admin_return']);
+            add_action('admin_post_edd_enkap_mark_order_status', [$this, 'checkRemotePaymentStatus']);
         }
 
         add_action('edd_' . $this->id . '_cc_form', [__CLASS__, 'remove_cc_form']);
@@ -421,12 +421,6 @@ class EDD_Enkap_Gateway
             return;
         }
 
-        $url = wp_nonce_url(
-            admin_url('admin-ajax.php?action=e_nkap_mark_order_status&status=check&order_id=' .
-                absint(wp_unslash($payment_id))),
-            'edd_enkap_check_status'
-        );
-
         echo '<div class="edd-enkap-track edd-admin-box-inside">';
         echo '<h3>E-Nkap details</h3>';
         echo '<p> ' . esc_html__('e-nkap Merchant Reference ID', Plugin::DOMAIN_TEXT) . ': <strong>' .
@@ -435,8 +429,20 @@ class EDD_Enkap_Gateway
             esc_html($payment->order_transaction_id) . '</strong></p>';
 
         if (in_array(strtolower($payment->status), ['in_progress', 'created', 'initialised'], true)) {
-            echo '<a href="' . esc_url($url) .
-                '" class="button check-status">' . __('Check Payment status', Plugin::DOMAIN_TEXT) . '</a>';
+            $url = wp_nonce_url(
+                admin_url('admin-post.php?action=edd_enkap_mark_order_status&status=check&order_id=' .
+                    absint(wp_unslash($payment_id))),
+                'edd_enkap_check_status'
+            );
+            echo wp_kses('<a href="' . esc_url($url) .
+                '" class="button check-status">' . __('Check Payment status', Plugin::DOMAIN_TEXT) . '</a>',
+                [
+                    'a' => [
+                        'href' => true,
+                        'class' => true,
+                    ]
+                ]
+            );
         }
         echo '</div>';
     }
