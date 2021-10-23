@@ -19,16 +19,16 @@ The usage of this plugin is completely free. You have to just have an Enkap acco
 # Installation
 We assume you already installed Easy Digital Downloads and configured it successfully
 
-1. Upload `e-nkap-edd-gateway` to the `/wp-content/plugins/` directory
+1. Upload `smobilplay-edd-gateway` to the `/wp-content/plugins/` directory
 
    Install Using GIT
 ```sh
 cd wp-content/plugins
 
-git clone https://github.com/camoo/enkap-edd-gateway.git e-nkap-edd-gateway
+git clone https://github.com/camoo/enkap-edd-gateway.git smobilplay-edd-gateway
 
 # install dependencies
-cd e-nkap-edd-gateway
+cd smobilplay-edd-gateway
 composer install
 ```
 

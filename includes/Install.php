@@ -6,7 +6,7 @@ defined('ABSPATH') || exit;
 
 class Install
 {
-    public const PLUGIN_MAIN_FILE = 'e-nkap-edd-gateway/e-nkap-edd-gateway.php';
+    public const PLUGIN_MAIN_FILE = 'smobilplay-edd-gateway/smobilplay-edd-gateway.php';
 
     public function __construct()
     {
