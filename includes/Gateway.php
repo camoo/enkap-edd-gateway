@@ -423,9 +423,9 @@ class EDD_Enkap_Gateway
 
         echo '<div class="edd-enkap-track edd-admin-box-inside">';
         echo '<h3>SmobilPay for e-commerce details</h3>';
-        echo '<p> ' . esc_html__('e-nkap Merchant Reference ID', Plugin::DOMAIN_TEXT) . ': <strong>' .
+        echo '<p> ' . esc_html__('smobilpay Merchant Reference ID', Plugin::DOMAIN_TEXT) . ': <strong>' .
             esc_html($payment->merchant_reference_id) . '</strong></p>';
-        echo '<p> ' . esc_html__('e-nkap Transaction ID', Plugin::DOMAIN_TEXT) . ': <strong>' .
+        echo '<p> ' . esc_html__('smobilpay Transaction ID', Plugin::DOMAIN_TEXT) . ': <strong>' .
             esc_html($payment->order_transaction_id) . '</strong></p>';
 
         if (empty($payment->status) ||
