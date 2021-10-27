@@ -15,7 +15,7 @@ if (!class_exists(Plugin::class)):
 
     class Plugin
     {
-        public const WP_EDD_ENKAP_DB_VERSION = '1.0.0';
+        public const WP_EDD_ENKAP_DB_VERSION = '1.0.1';
         protected $id;
         protected $mainMenuId;
         protected $adapterName;

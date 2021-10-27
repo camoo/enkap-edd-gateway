@@ -4,7 +4,7 @@
  * Plugin Name: SmobilPay for e-commerce for Easy Digital Downloads
  * Plugin URI: https://enkap.cm/
  * Description: Receive Mobile Money payments on your store using SmobilPay for e-commerce.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Tested up to: 5.8.1
  * EDD requires at least: 2.0
  * EDD tested up to: 2.11.2
@@ -37,6 +37,6 @@ require_once(__DIR__ . '/includes/Plugin.php');
         __('Do you have any questions or requests?', Plugin::DOMAIN_TEXT),
         'https://support.enkap.cm',
         __('Do you like our plugin and can recommend to others?', Plugin::DOMAIN_TEXT)),
-    '1.0.0'
+    '1.0.1'
 )
 )->register();

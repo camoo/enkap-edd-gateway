@@ -3,7 +3,7 @@ Contributors: camoo, maviance
 Tags: Gateway, Mobile Money, Orange Money, Payment Aggregator, WooCommerce, e-Commerce, Cameroon, Cameroun, MTN, Orange, payment platform, momo, OM, YUP,
 Requires at least: 4.7
 Tested up to: 5.8.1
-Stable Tag: 1.0.0
+Stable Tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -94,7 +94,9 @@ This plugin is a FREE download.
 N/A
 
 == Changelog ==
-N/A
+= 1.0.0: October 27, 2021 =
+* Tweak: E-nkap renamed to SmobilPay for e-commerce
+* Fix: vendor updated
 
 = 1.0.0: October 23, 2021 =
 * Start plugin
