@@ -2,7 +2,7 @@
 Contributors: camoo, maviance
 Tags: Gateway, Mobile Money, Orange Money, Payment Aggregator, WooCommerce, e-Commerce, Cameroon, Cameroun, MTN, Orange, payment platform, momo, OM, YUP,
 Requires at least: 4.7
-Tested up to: 5.8.1
+Tested up to: 5.8.2
 Stable Tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html

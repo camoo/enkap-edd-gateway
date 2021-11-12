@@ -242,6 +242,28 @@ if (!class_exists(Plugin::class)):
                     'order_transaction_id' => sanitize_text_field($transactionId)
                 ]
             );
+
+            /**
+             * Executes the hook smobilpay_after_status_change where ever it's defined.
+             *
+             * Example usage:
+             *
+             *     // The action callback function.
+             *     function example_callback( $id, $shopType ) {
+             *         // (maybe) do something with the args.
+             *     }
+             *
+             *     add_action( 'smobilpay_after_status_change', 'example_callback', 10, 2 );
+             *
+             *     /*
+             *      * Trigger the actions by calling the 'example_callback()' function
+             *      * that's hooked onto `smobilpay_after_status_change`.
+             *
+             *      * - $id is either the transaction ID or the merchant reference ID
+             *      * - $shopType is the shop invoked actually the hook
+             *
+             * @since 1.0.3
+             */
             do_action('smobilpay_after_status_change', sanitize_text_field($transactionId), 'edd');
 
         }
