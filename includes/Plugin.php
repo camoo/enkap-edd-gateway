@@ -15,7 +15,7 @@ if (!class_exists(Plugin::class)):
 
     class Plugin
     {
-        public const WP_EDD_ENKAP_DB_VERSION = '1.0.1';
+        public const WP_EDD_ENKAP_DB_VERSION = '1.0.2';
         protected $id;
         protected $mainMenuId;
         protected $adapterName;
@@ -180,6 +180,7 @@ if (!class_exists(Plugin::class)):
                 default:
                     break;
             }
+
             return $result;
         }
 
@@ -241,6 +242,8 @@ if (!class_exists(Plugin::class)):
                     'order_transaction_id' => sanitize_text_field($transactionId)
                 ]
             );
+            do_action('smobilpay_after_status_change', sanitize_text_field($transactionId), 'edd');
+
         }
     }
 
