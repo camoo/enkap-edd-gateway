@@ -94,7 +94,7 @@ This plugin is a FREE download.
 N/A
 
 == Changelog ==
-= 1.0.2: November xx, 2021 =
+= 1.0.2: November 16, 2021 =
 * New: Hook smobilpay_after_status_change added
 
 = 1.0.1: October 27, 2021 =
